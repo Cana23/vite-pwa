@@ -3,6 +3,13 @@ import { createRoot } from 'react-dom/client'
 import './index.css'
 import App from './App.tsx'
 
+
+createRoot(document.getElementById('root')!).render(
+  <StrictMode>
+    <App />
+  </StrictMode>,
+)
+
 // Service Worker
 if ("serviceWorker" in navigator) {
   window.addEventListener("load", () => {
@@ -19,9 +26,3 @@ if ("Notification" in window) {
     console.log("Permiso de notificación:", result);
   });
 }
-
-createRoot(document.getElementById('root')!).render(
-  <StrictMode>
-    <App />
-  </StrictMode>,
-)

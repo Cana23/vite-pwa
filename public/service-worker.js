@@ -12,7 +12,7 @@ const urlsToCache = [
 self.addEventListener("install", (event) => {
   event.waitUntil(
     caches.open(CACHE_NAME).then((cache) => {
-      console.log("Archivos cacheados");
+      console.log("Archivos cacheados correctamente");
       return cache.addAll(urlsToCache);
     })
   );
@@ -23,19 +23,27 @@ self.addEventListener("activate", (event) => {
   event.waitUntil(
     caches.keys().then((cacheNames) =>
       Promise.all(
-        cacheNames.map(
-          (cache) => cache !== CACHE_NAME && caches.delete(cache)
-        )
+        cacheNames.map((cache) => {
+          if (cache !== CACHE_NAME) {
+            console.log("Eliminando cache viejo:", cache);
+            return caches.delete(cache);
+          }
+        })
       )
     )
   );
 });
 
-// Interceptar peticiones (modo offline)
+// Interceptar peticiones (funcional sin conexión)
 self.addEventListener("fetch", (event) => {
   event.respondWith(
     caches.match(event.request).then((response) => {
-      return response || fetch(event.request);
+      return (
+        response ||
+        fetch(event.request).catch(() =>
+          caches.match("/index.html")
+        )
+      );
     })
   );
 });

@@ -1,12 +1,14 @@
 {
   "name": "Registro de Hábitos",
   "short_name": "Hábitos",
-  "description": "App de registro de hábitos, instalable y funcional sin conexión.",
-  "start_url": ".",
+  "description": "App progresiva para registrar y mantener tus hábitos diarios, incluso sin conexión.",
+  "start_url": "/",
+  "scope": "/",
   "display": "standalone",
-  "background_color": "#ffffff",
+  "background_color": "#f9fafb",
   "theme_color": "#2563eb",
   "orientation": "portrait-primary",
+  "id": "/",
   "icons": [
     {
       "src": "/web-app-manifest-192x192.png",
@@ -17,6 +19,28 @@
       "src": "/web-app-manifest-512x512.png",
       "sizes": "512x512",
       "type": "image/png"
+    },
+    {
+      "src": "/web-app-manifest-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable any"
+    }
+  ],
+  "prefer_related_applications": false,
+  "categories": ["productivity", "health", "lifestyle"],
+  "shortcuts": [
+    {
+      "name": "Agregar hábito rápido",
+      "short_name": "Nuevo hábito",
+      "description": "Crea un nuevo hábito en un toque.",
+      "url": "/?action=new"
+    },
+    {
+      "name": "Ver progreso",
+      "short_name": "Progreso",
+      "description": "Consulta tus hábitos completados.",
+      "url": "/?action=progress"
     }
   ]
 }
